@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Professional Soccer Tournament Dashboard — Live standings, top scorers, top assisters, and MVP.">
+    <title>Ramadan Super League 2026</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="LOGO.png">
+</head>
+
+<body>
+
+    <!-- Floating Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="page">
+
+        <!-- Header -->
+        <header class="header">
+            <img src="LOGO.png" alt="Ramadan Super League" class="header-logo">
+            <h1>Ramadan Super League 2026</h1>
+            <p>RSL • Season 2025/26</p>
+        </header>
+
+        <!-- Dashboard Grid -->
+        <main class="dashboard">
+
+            <!-- LEFT COLUMN — 3 Stat Cards -->
+            <aside class="stats-column">
+
+                <!-- ====== TOP SCORERS ====== -->
+                <div class="card-3d stat-card" data-tilt data-modal="scorers">
+                    <div class="stat-card__header">
+                        <div class="stat-card__icon stat-card__icon--scorers">⚽</div>
+                        <div>
+                            <div class="stat-card__title">Top Scorers</div>
+                            <div class="stat-card__subtitle">Golden Boot Race</div>
+                        </div>
+                    </div>
+
+                    <!-- Dynamically populated by script.js -->
+                    <div id="scorers-list"></div>
+                </div>
+
+                <!-- ====== TOP ASSISTERS ====== -->
+                <div class="card-3d stat-card" data-tilt data-modal="assists">
+                    <div class="stat-card__header">
+                        <div class="stat-card__icon stat-card__icon--assists">🅰️</div>
+                        <div>
+                            <div class="stat-card__title">Top Assisters</div>
+                            <div class="stat-card__subtitle">Playmaker Award</div>
+                        </div>
+                    </div>
+
+                    <!-- Dynamically populated by script.js -->
+                    <div id="assists-list"></div>
+                </div>
+
+                <!-- ====== BEST MVP ====== -->
+                <div class="card-3d stat-card" data-tilt data-modal="mvp">
+                    <div class="stat-card__header">
+                        <div class="stat-card__icon stat-card__icon--mvp">👑</div>
+                        <div>
+                            <div class="stat-card__title">Best MVP</div>
+                            <div class="stat-card__subtitle">Most Valuable Player</div>
+                        </div>
+                    </div>
+
+                    <!-- Dynamically populated by script.js -->
+                    <div class="mvp-featured" id="mvp-featured"></div>
+
+                    <!-- MVP Stats -->
+                    <div class="player-stats" id="mvp-stats"
+                        style="justify-content:center; margin-top: 14px; gap: 10px;"></div>
+
+                    <!-- Runner-ups -->
+                    <div id="mvp-runners"
+                        style="margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06);">
+                    </div>
+                </div>
+
+
+            </aside>
+
+            <!-- RIGHT COLUMN — Standings + Transfer -->
+            <div class="right-column">
+                <section class="card-3d standings-card animate-in" data-tilt-max="3">
+                    <div class="standings-card__header">
+                        <div class="standings-card__header-left">
+                            <div class="standings-card__icon">🏆</div>
+                            <div>
+                                <div class="standings-card__title">Standings</div>
+                                <div class="standings-card__season">Season 2025/26</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="standings-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Team</th>
+                                <th>MP</th>
+                                <th>W</th>
+                                <th>D</th>
+                                <th>L</th>
+                                <th>GF</th>
+                                <th>GA</th>
+                                <th>GD</th>
+                                <th>Pts</th>
+                                <th>Form</th>
+                            </tr>
+                        </thead>
+                        <tbody id="standings-body">
+                            <!-- Dynamically populated by script.js -->
+                        </tbody>
+                    </table>
+
+                    <!-- Team Quick Stats -->
+                    <!-- Dynamically populated by script.js -->
+                    <div class="team-stats-row" id="team-stats-row"></div>
+                </section>
+
+                <!-- ====== TRANSFER WINDOW ====== -->
+                <div class="card-3d transfer-card" data-tilt>
+                    <div class="stat-card__header">
+                        <div class="stat-card__icon stat-card__icon--transfer">🔄</div>
+                        <div>
+                            <div class="stat-card__title">Transfer Window</div>
+                            <div class="stat-card__subtitle">Weekly Player Swap</div>
+                        </div>
+                    </div>
+                    <div id="transfer-content"></div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- ====== TOURNAMENT SNAPSHOT ====== -->
+        <section class="tournament-snapshot">
+            <div class="snapshot-header">
+                <div class="snapshot-header__icon">📊</div>
+                <div>
+                    <h2 class="snapshot-header__title">Tournament Snapshot</h2>
+                    <p class="snapshot-header__subtitle">Key numbers at a glance</p>
+                </div>
+            </div>
+            <div class="snapshot-grid">
+                <div class="snapshot-card" id="snapshot-goals"></div>
+                <div class="snapshot-card" id="snapshot-rating"></div>
+                <div class="snapshot-card" id="snapshot-cleansheets"></div>
+                <div class="snapshot-card" id="snapshot-motm"></div>
+            </div>
+        </section>
+
+        <!-- ====== BEST XI TEAMS ====== -->
+        <section class="best-xi-section">
+            <div class="best-xi-header">
+                <div class="best-xi-header__icon">🏅</div>
+                <div>
+                    <h2 class="best-xi-header__title">Best Teams of the Tournament</h2>
+                    <p class="best-xi-header__subtitle">Auto-selected by Goals, Assists, Clean Sheets &amp; Rating</p>
+                </div>
+            </div>
+
+            <div class="best-xi-grid">
+                <!-- Team 1 Card -->
+                <div class="best-xi-card" id="best-xi-card-1">
+                    <div class="best-xi-card__label">Team of the Tournament</div>
+                    <div class="pitch">
+                        <div class="pitch__lines">
+                            <div class="pitch__center-circle"></div>
+                            <div class="pitch__center-line"></div>
+                            <div class="pitch__penalty-top"></div>
+                            <div class="pitch__penalty-bottom"></div>
+                        </div>
+                        <div class="pitch__row pitch__row--attack" data-row="Attack">
+                            <span class="pitch__row-label">ATT</span>
+                        </div>
+                        <div class="pitch__row pitch__row--midfield" data-row="Midfield">
+                            <span class="pitch__row-label">MID</span>
+                        </div>
+                        <div class="pitch__row pitch__row--defense" data-row="Defense">
+                            <span class="pitch__row-label">DEF</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team 2 Card -->
+                <div class="best-xi-card" id="best-xi-card-2">
+                    <div class="best-xi-card__label">2nd Best Team</div>
+                    <div class="pitch">
+                        <div class="pitch__lines">
+                            <div class="pitch__center-circle"></div>
+                            <div class="pitch__center-line"></div>
+                            <div class="pitch__penalty-top"></div>
+                            <div class="pitch__penalty-bottom"></div>
+                        </div>
+                        <div class="pitch__row pitch__row--attack" data-row="Attack">
+                            <span class="pitch__row-label">ATT</span>
+                        </div>
+                        <div class="pitch__row pitch__row--midfield" data-row="Midfield">
+                            <span class="pitch__row-label">MID</span>
+                        </div>
+                        <div class="pitch__row pitch__row--defense" data-row="Defense">
+                            <span class="pitch__row-label">DEF</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- /.page -->
+
+    <!-- ====== MODAL OVERLAY ====== -->
+    <div class="modal-overlay" id="player-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+            <div class="modal-header">
+                <div class="modal-header__icon" id="modal-icon">⚽</div>
+                <div>
+                    <div class="modal-header__title" id="modal-title">Title</div>
+                    <div class="modal-header__subtitle" id="modal-subtitle">Subtitle</div>
+                </div>
+            </div>
+            <div class="modal-player-list" id="modal-player-list" data-lenis-prevent></div>
+        </div>
+    </div>
+
+    <!-- GSAP & Lenis -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

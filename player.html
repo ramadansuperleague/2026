@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Profile — Ramadan Super League</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👤</text></svg>">
+    <style>
+        /* Specific styles for player profile */
+        .profile-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-bottom: 80px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            margin-bottom: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent-indigo);
+        }
+
+        .profile-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-xl);
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+            pointer-events: none;
+        }
+
+        .profile-avatar-wrapper {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+            border: 4px solid #fff;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .profile-avatar svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .profile-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--text-primary);
+            line-height: 1.1;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-capsule {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            background: rgba(0, 0, 0, 0.04);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .profile-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 32px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-box {
+            background: #fff;
+            border-radius: var(--radius-lg);
+            padding: 20px 10px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-box__value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent-indigo);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .stat-box__label {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 600px) {
+            .profile-stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .profile-name {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Background Orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="page">
+        <!-- Header -->
+        <header class="header">
+            <img src="logo.png" alt="RSL" class="header-logo" style="height: 100px;">
+        </header>
+
+        <div class="profile-container">
+            <a href="index.html" class="back-link">← Back to Dashboard</a>
+
+            <div class="card-3d profile-card" data-tilt>
+                <div class="profile-avatar-wrapper">
+                    <div class="profile-avatar" id="p-avatar"></div>
+                </div>
+                <h1 class="profile-name" id="p-name">Loading...</h1>
+                <div class="profile-meta">
+                    <div class="profile-capsule" id="p-team">Team</div>
+                    <div class="profile-capsule" id="p-pos">Position</div>
+                </div>
+
+                <div class="profile-stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-box__value" id="p-goals">0</div>
+                        <div class="stat-box__label">Goals</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-box__value" id="p-assists">0</div>
+                        <div class="stat-box__label">Assists</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-box__value" id="p-rating">0.0</div>
+                        <div class="stat-box__label">Rating</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-box__value" id="p-motm">0</div>
+                        <div class="stat-box__label">MOTM</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get Player ID from URL
+            const params = new URLSearchParams(window.location.search);
+            const playerId = parseInt(params.get('id'));
+
+            if (!playerId) {
+                window.location.href = 'index.html'; // Redirect if no ID
+                return;
+            }
+
+            // Find player
+            const player = playersData.find(p => p.id === playerId);
+            if (!player) {
+                document.getElementById('p-name').textContent = 'Player Not Found';
+                return;
+            }
+
+            // Populate Data
+            document.title = `${player.name} — Profile`;
+            document.getElementById('p-name').textContent = player.name;
+            document.getElementById('p-team').innerHTML = `<span class="team-dot" style="background:${player.teamColor}"></span> ${player.team}`;
+            document.getElementById('p-pos').textContent = player.position;
+            document.getElementById('p-goals').textContent = player.goals;
+            document.getElementById('p-assists').textContent = player.assists;
+            document.getElementById('p-rating').textContent = player.rating.toFixed(1);
+            document.getElementById('p-motm').textContent = player.motm;
+            document.getElementById('p-avatar').innerHTML = getPlayerAvatar(player, 120).replace('decoding="async"', 'decoding="async" width="120" height="120"');
+
+            // GSAP Animations
+            gsap.from('.back-link', { x: -20, opacity: 0, duration: 0.6, ease: 'power3.out', delay: 0.2 });
+            gsap.from('.profile-card', { y: 40, opacity: 0, scale: 0.95, duration: 0.8, ease: 'expo.out', delay: 0.3 });
+
+            // Stagger stats
+            gsap.from('.stat-box', {
+                y: 20,
+                opacity: 0,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: 'back.out(1.7)',
+                delay: 0.6
+            });
+
+            // Lenis
+            const lenis = new Lenis();
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+
+            // 3D Tilt
+            const card = document.querySelector('.profile-card');
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width;
+                const y = (e.clientY - rect.top) / rect.height;
+
+                gsap.to(card, {
+                    rotateX: (y - 0.5) * -5,
+                    rotateY: (x - 0.5) * 5,
+                    scale: 1.02,
+                    duration: 0.5,
+                    ease: 'power2.out',
+                    transformPerspective: 1000
+                });
+            });
+
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, {
+                    rotateX: 0, rotateY: 0, scale: 1, duration: 0.8, ease: 'elastic.out(1, 0.5)'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
