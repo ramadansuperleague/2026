@@ -26,6 +26,7 @@
             font-weight: 600;
             margin-bottom: 24px;
             transition: color 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .back-link:hover {
@@ -36,7 +37,7 @@
             background: var(--bg-card);
             border: 1px solid var(--glass-border);
             border-radius: var(--radius-xl);
-            padding: 40px;
+            padding: clamp(20px, 5vw, 40px);
             box-shadow: var(--shadow-lg);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
@@ -55,8 +56,8 @@
         }
 
         .profile-avatar-wrapper {
-            width: 120px;
-            height: 120px;
+            width: clamp(80px, 15vw, 120px);
+            height: clamp(80px, 15vw, 120px);
             margin: 0 auto 24px;
             position: relative;
             z-index: 2;
@@ -79,7 +80,7 @@
 
         .profile-name {
             font-family: 'Outfit', sans-serif;
-            font-size: 2.5rem;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
             font-weight: 900;
             color: var(--text-primary);
             line-height: 1.1;
@@ -93,10 +94,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             margin-bottom: 32px;
             position: relative;
             z-index: 2;
+            flex-wrap: wrap;
         }
 
         .profile-capsule {
@@ -137,7 +139,7 @@
 
         .stat-box__value {
             font-family: 'Outfit', sans-serif;
-            font-size: 2rem;
+            font-size: clamp(1.4rem, 4vw, 2rem);
             font-weight: 900;
             color: var(--accent-indigo);
             line-height: 1;
@@ -155,10 +157,58 @@
         @media (max-width: 600px) {
             .profile-stats-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
             }
 
-            .profile-name {
-                font-size: 2rem;
+            .profile-container {
+                padding-bottom: 50px;
+            }
+
+            .profile-meta {
+                margin-bottom: 24px;
+            }
+
+            .profile-capsule {
+                font-size: 0.72rem;
+                padding: 5px 12px;
+            }
+
+            .stat-box {
+                padding: 16px 8px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .profile-avatar-wrapper {
+                margin-bottom: 16px;
+            }
+
+            .profile-avatar {
+                border-width: 3px;
+            }
+
+            .profile-stats-grid {
+                gap: 8px;
+            }
+
+            .stat-box {
+                padding: 14px 6px;
+                border-radius: var(--radius-md);
+            }
+
+            .stat-box__label {
+                font-size: 0.55rem;
+                letter-spacing: 0.5px;
+            }
+
+            .profile-capsule {
+                font-size: 0.65rem;
+                padding: 4px 10px;
+            }
+
+            .back-link {
+                font-size: 0.85rem;
+                margin-bottom: 16px;
             }
         }
     </style>
@@ -174,7 +224,7 @@
     <div class="page">
         <!-- Header -->
         <header class="header">
-            <img src="LOGO.png" alt="RSL" class="header-logo" style="height: 100px;">
+            <img src="logo.png" alt="RSL" class="header-logo" style="height: 100px;">
         </header>
 
         <div class="profile-container">
@@ -292,6 +342,5 @@
         });
     </script>
 </body>
-
 
 </html>

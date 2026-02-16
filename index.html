@@ -155,6 +155,8 @@
                 <div class="snapshot-card" id="snapshot-rating"></div>
                 <div class="snapshot-card" id="snapshot-cleansheets"></div>
                 <div class="snapshot-card" id="snapshot-motm"></div>
+                <div class="snapshot-card" id="snapshot-contributions"></div>
+                <div class="snapshot-card" id="snapshot-defense"></div>
             </div>
         </section>
 
@@ -215,6 +217,49 @@
             </div>
         </section>
 
+        <!-- ====== AWARDS — BALLON D'OR & WOODEN SPOON ====== -->
+        <section class="awards-section">
+            <div class="awards-header">
+                <div class="awards-header__icon">🏆</div>
+                <div>
+                    <h2 class="awards-header__title">Player Awards</h2>
+                    <p class="awards-header__subtitle">Vote for the best & worst players of the tournament</p>
+                </div>
+            </div>
+
+            <div class="awards-grid">
+                <!-- Ballon d'Or Card -->
+                <div class="award-card award-card--ballon-dor" id="award-ballon-dor">
+                    <div class="award-card__header">
+                        <div class="award-card__trophy">🏆</div>
+                        <div>
+                            <div class="award-card__title">Ballon d'Or</div>
+                            <div class="award-card__subtitle">Best Player of the Tournament</div>
+                        </div>
+                    </div>
+                    <div class="award-card__status" id="ballon-dor-status"></div>
+                    <div class="award-card__body" id="ballon-dor-body">
+                        <!-- Dynamically populated by script.js -->
+                    </div>
+                </div>
+
+                <!-- Wooden Spoon Card -->
+                <div class="award-card award-card--wooden-spoon" id="award-wooden-spoon">
+                    <div class="award-card__header">
+                        <div class="award-card__trophy">🥄</div>
+                        <div>
+                            <div class="award-card__title">Wooden Spoon</div>
+                            <div class="award-card__subtitle">Worst Player of the Tournament</div>
+                        </div>
+                    </div>
+                    <div class="award-card__status" id="wooden-spoon-status"></div>
+                    <div class="award-card__body" id="wooden-spoon-body">
+                        <!-- Dynamically populated by script.js -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </div><!-- /.page -->
 
     <!-- ====== MODAL OVERLAY ====== -->
@@ -236,6 +281,9 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <!-- Firebase SDK (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-database-compat.js"></script>
     <script src="data.js"></script>
     <script src="script.js"></script>
 </body>

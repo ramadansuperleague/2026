@@ -187,7 +187,7 @@ body::before {
 }
 
 .header-logo {
-  height: 140px;
+  height: clamp(70px, 12vw, 140px);
   width: auto;
   display: block;
   margin: 0 auto 20px;
@@ -246,7 +246,7 @@ body::before {
 /* ---------- Dashboard Grid ---------- */
 .dashboard {
   display: grid;
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: minmax(300px, 380px) 1fr;
   gap: 28px;
   padding-bottom: clamp(60px, 10vh, 100px);
   align-items: start;
@@ -1798,221 +1798,6 @@ body::before {
   z-index: 2;
 }
 
-/* ---------- Responsive Design ---------- */
-
-/* Tablet / Small Desktop (max-width: 1080px) */
-@media (max-width: 1080px) {
-  .dashboard {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  /* Stat cards move to top in a row */
-  .stats-column {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    order: 1;
-    /* Stats on top */
-    position: static;
-    gap: 16px;
-  }
-
-  .standings-card {
-    order: 2;
-  }
-
-  .best-xi-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-
-  .snapshot-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Mobile (max-width: 768px) */
-@media (max-width: 768px) {
-  .page {
-    padding: 0 16px;
-  }
-
-  .header {
-    padding: 32px 0 24px;
-  }
-
-  .header h1 {
-    font-size: 2.2rem;
-    letter-spacing: -1px;
-    margin-bottom: 8px;
-  }
-
-  .header p {
-    font-size: 0.85rem;
-  }
-
-  /* Stack stat cards vertically on mobile */
-  .stats-column {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .card-3d {
-    padding: 20px;
-    border-radius: var(--radius-lg);
-  }
-
-  /* Stat card specifics */
-  .stat-card__header {
-    margin-bottom: 12px;
-  }
-
-  .stat-card__icon {
-    width: 38px;
-    height: 38px;
-    font-size: 1rem;
-  }
-
-  .stat-card__title {
-    font-size: 1rem;
-  }
-
-  /* Standings card */
-  .standings-card {
-    padding: 24px 16px;
-  }
-
-  .standings-card__header {
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .standings-card__title {
-    font-size: 1.25rem;
-  }
-
-  .standings-card__icon {
-    width: 42px;
-    height: 42px;
-    font-size: 1.25rem;
-  }
-
-  /* Table horizontal scroll */
-  .standings-table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .standings-table th,
-  .standings-table td {
-    padding: 10px 12px;
-    font-size: 0.8rem;
-  }
-
-  .team-cell {
-    gap: 10px;
-  }
-
-  .team-logo {
-    width: 32px;
-    height: 32px;
-    font-size: 1rem;
-  }
-
-  .team-name {
-    font-size: 0.85rem;
-  }
-}
-
-/* Best XI Mobile */
-@media (max-width: 640px) {
-  .best-xi-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .snapshot-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-  .snapshot-card__value {
-    font-size: 2rem;
-  }
-
-  .best-xi-header__title {
-    font-size: 1.3rem;
-  }
-
-  .pitch {
-    aspect-ratio: 3 / 4.5;
-    padding: 50px 12px 20px;
-  }
-
-  .pitch-player__avatar {
-    width: 44px;
-    height: 44px;
-  }
-
-  .pitch-player__name {
-    font-size: 0.6rem;
-    max-width: 90px;
-  }
-
-  .pitch__center-circle {
-    width: 60px;
-    height: 60px;
-  }
-}
-
-/* Small Mobile (max-width: 480px) */
-@media (max-width: 480px) {
-  .header h1 {
-    font-size: 1.8rem;
-  }
-
-  .header__tournament-badge {
-    padding: 8px 16px;
-    font-size: 0.65rem;
-    margin-bottom: 16px;
-  }
-
-  /* Better modal Mobile experience */
-  .modal-content {
-    width: 100%;
-    height: 100%;
-    max-height: 100%;
-    border-radius: 0;
-    max-width: none;
-  }
-
-  .modal-overlay {
-    padding: 0;
-    align-items: flex-end;
-    /* Slide up from bottom feeling */
-  }
-
-  .modal-close {
-    top: 12px;
-    right: 12px;
-    width: 40px;
-    height: 40px;
-    /* Larger touch target */
-  }
-
-  .modal-header {
-    padding: 20px 20px 16px;
-  }
-
-  .modal-player-list {
-    padding: 12px 16px 80px;
-    /* Space for thumb reach */
-  }
-}
-
 /* ---------- Scrollbar ---------- */
 ::-webkit-scrollbar {
   width: 5px;
@@ -2068,6 +1853,7 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.35s ease, visibility 0.35s ease;
@@ -2111,6 +1897,7 @@ body::before {
   transition: all 0.25s ease;
   z-index: 2;
   line-height: 1;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .modal-close:hover {
@@ -2183,11 +1970,1048 @@ body::before {
   margin-top: 2px;
 }
 
-@media (max-width: 640px) {
+
+/* ========================================
+   AWARDS SECTION — Ballon d'Or & Wooden Spoon
+   ======================================== */
+
+.awards-section {
+  margin-top: clamp(60px, 8vh, 100px);
+  position: relative;
+}
+
+.awards-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.awards-header__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(251, 191, 36, 0.08));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.awards-header__title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+}
+
+.awards-header__subtitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* ---- Award Card Base ---- */
+.award-card {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: clamp(20px, 3vw, 32px);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s var(--ease-bounce), box-shadow 0.4s ease;
+}
+
+.award-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+}
+
+.award-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- Ballon d'Or Theme (Gold) ---- */
+.award-card--ballon-dor::before {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.06) 0%, rgba(251, 191, 36, 0.03) 50%, transparent 100%);
+}
+
+.award-card--ballon-dor {
+  border-color: rgba(212, 175, 55, 0.15);
+}
+
+.award-card--ballon-dor .award-card__title {
+  background: linear-gradient(135deg, #d4af37, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---- Wooden Spoon Theme (Dark/Red) ---- */
+.award-card--wooden-spoon::before {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(127, 29, 29, 0.03) 50%, transparent 100%);
+}
+
+.award-card--wooden-spoon {
+  border-color: rgba(239, 68, 68, 0.12);
+}
+
+.award-card--wooden-spoon .award-card__title {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---- Card Header ---- */
+.award-card__header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.award-card__trophy {
+  font-size: 2.2rem;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  animation: trophyFloat 3s ease-in-out infinite;
+}
+
+@keyframes trophyFloat {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-4px) rotate(3deg);
+  }
+}
+
+.award-card__title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+
+.award-card__subtitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-top: 2px;
+}
+
+/* ---- Card Status Bar ---- */
+.award-card__status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  background: rgba(0, 0, 0, 0.03);
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.award-status__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.award-status__dot--locked {
+  background: var(--text-muted);
+}
+
+.award-status__dot--voting {
+  background: #10b981;
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+.award-status__dot--results {
+  background: var(--accent-gold);
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 currentColor;
+  }
+
+  50% {
+    opacity: 0.7;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+  }
+}
+
+.award-status__text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.award-status__timer {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-indigo);
+  margin-left: auto;
+  letter-spacing: 0.5px;
+}
+
+/* ---- Card Body ---- */
+.award-card__body {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Locked State ---- */
+.award-locked {
+  text-align: center;
+  padding: 32px 16px;
+}
+
+.award-locked__icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+  opacity: 0.4;
+  filter: grayscale(1);
+}
+
+.award-locked__text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ---- Vote Player Row ---- */
+.vote-player-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  transition: background 0.25s ease;
+  position: relative;
+}
+
+.vote-player-row:hover {
+  background: rgba(0, 0, 0, 0.025);
+}
+
+.vote-player-row+.vote-player-row {
+  margin-top: 4px;
+}
+
+.vote-player-row .player-avatar {
+  flex-shrink: 0;
+}
+
+.vote-player-row .player-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.vote-player-row .player-info__name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vote-player-row .player-info__team {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.vote-player-row .player-info__meta {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+/* ---- Vote Button ---- */
+.vote-btn {
+  padding: 6px 16px;
+  border: 2px solid var(--accent-indigo);
+  background: transparent;
+  color: var(--accent-indigo);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.vote-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent-indigo);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  z-index: 0;
+}
+
+.vote-btn:hover::before {
+  transform: scaleX(1);
+}
+
+.vote-btn:hover {
+  color: #fff;
+}
+
+.vote-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Voted state */
+.vote-btn--voted {
+  background: var(--accent-indigo);
+  color: #fff;
+  border-color: var(--accent-indigo);
+  pointer-events: none;
+}
+
+.vote-btn--voted::before {
+  transform: scaleX(1);
+}
+
+/* Disabled state (already voted for different player) */
+.vote-btn--disabled {
+  border-color: rgba(0, 0, 0, 0.1);
+  color: var(--text-muted);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ---- Ballon d'Or specific vote button ---- */
+.award-card--ballon-dor .vote-btn {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.award-card--ballon-dor .vote-btn::before {
+  background: linear-gradient(135deg, #d4af37, #f59e0b);
+}
+
+.award-card--ballon-dor .vote-btn--voted {
+  border-color: var(--accent-gold);
+  background: linear-gradient(135deg, #d4af37, #f59e0b);
+  color: #fff;
+}
+
+/* ---- Wooden Spoon specific vote button ---- */
+.award-card--wooden-spoon .vote-btn {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.award-card--wooden-spoon .vote-btn::before {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+}
+
+.award-card--wooden-spoon .vote-btn--voted {
+  border-color: #ef4444;
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  color: #fff;
+}
+
+/* ---- Results State ---- */
+.award-result {
+  text-align: center;
+  padding: 16px 0;
+}
+
+.award-result__crown {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  animation: crownBounce 2s ease-in-out infinite;
+}
+
+@keyframes crownBounce {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-6px) scale(1.1);
+  }
+}
+
+.award-result__avatar {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 16px;
+  position: relative;
+}
+
+.award-result__avatar .avatar-initial,
+.award-result__avatar img {
+  width: 80px !important;
+  height: 80px !important;
+  font-size: 30px !important;
+}
+
+.award-result__name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+
+.award-result__team {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.award-result__stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 12px;
+}
+
+.award-result__stat {
+  text-align: center;
+}
+
+.award-result__stat-value {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--accent-indigo);
+  line-height: 1;
+}
+
+.award-result__stat-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.award-result__your-vote {
+  margin-top: 20px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: rgba(0, 0, 0, 0.03);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.award-result__your-vote strong {
+  color: var(--accent-indigo);
+}
+
+/* Winner glow */
+.award-card--ballon-dor .award-result__stat-value {
+  color: var(--accent-gold);
+}
+
+.award-card--wooden-spoon .award-result__stat-value {
+  color: #ef4444;
+}
+
+/* ---- Vote confirmation animation ---- */
+@keyframes voteConfirm {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.vote-btn--just-voted {
+  animation: voteConfirm 0.4s ease;
+}
+
+/* ---- Live Vote Bar (behind player row) ---- */
+.vote-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  border-radius: var(--radius-md);
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.08), rgba(99, 102, 241, 0.04));
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.award-card--ballon-dor .vote-bar {
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.1), rgba(245, 158, 11, 0.04));
+}
+
+.award-card--wooden-spoon .vote-bar {
+  background: linear-gradient(90deg, rgba(239, 68, 68, 0.1), rgba(185, 28, 28, 0.04));
+}
+
+.vote-player-row {
+  position: relative;
+  z-index: 0;
+}
+
+.vote-player-row>*:not(.vote-bar) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Live Vote Count Badge ---- */
+.vote-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.award-card--ballon-dor .vote-count {
+  background: rgba(212, 175, 55, 0.08);
+  border-color: rgba(212, 175, 55, 0.15);
+}
+
+.award-card--wooden-spoon .vote-count {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.15);
+}
+
+/* ---- Leader Highlight ---- */
+.vote-player-row--leader {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.vote-player-row--leader .vote-count {
+  color: var(--accent-indigo);
+  border-color: var(--accent-indigo);
+  background: rgba(99, 102, 241, 0.12);
+  transform: scale(1.1);
+}
+
+.award-card--ballon-dor .vote-player-row--leader .vote-count {
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+  background: rgba(212, 175, 55, 0.15);
+}
+
+.award-card--wooden-spoon .vote-player-row--leader .vote-count {
+  color: #ef4444;
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+}
+
+/* ---- Results Vote Summary ---- */
+.award-result__vote-summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
+}
+
+.award-result__vote-count {
+  font-weight: 800;
+  color: var(--accent-indigo);
+}
+
+.award-card--ballon-dor .award-result__vote-count {
+  color: var(--accent-gold);
+}
+
+.award-card--wooden-spoon .award-result__vote-count {
+  color: #ef4444;
+}
+
+.award-result__vote-pct {
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--accent-indigo);
+  font-weight: 700;
+  font-size: 0.68rem;
+}
+
+.award-card--ballon-dor .award-result__vote-pct {
+  background: rgba(212, 175, 55, 0.1);
+  color: var(--accent-gold);
+}
+
+.award-card--wooden-spoon .award-result__vote-pct {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.award-result__vote-total {
+  color: var(--text-muted);
+  font-size: 0.68rem;
+}
+
+/* ---------- Touch-Friendly Tap Targets ---------- */
+@media (hover: none) and (pointer: coarse) {
+
+  .stat-card,
+  .snapshot-card,
+  .team-mini-card,
+  .pitch-player,
+  .modal-close,
+  .standings-table tbody tr {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .modal-close {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Disable 3D hover effects on touch */
+  .stat-card:hover .stat-card__icon {
+    transform: none;
+  }
+
+  .pitch-player:hover {
+    transform: none;
+  }
+
+  .snapshot-card:hover {
+    transform: none;
+  }
+
+  .best-xi-card:hover {
+    transform: none;
+  }
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN — ALL BREAKPOINTS
+   ===================================================== */
+
+/* ---------- Large Desktop (max-width: 1200px) ---------- */
+@media (max-width: 1200px) {
+  .dashboard {
+    grid-template-columns: minmax(280px, 340px) 1fr;
+    gap: 24px;
+  }
+
+  .standings-card {
+    padding: 28px;
+  }
+
+  /* Slightly shrink orbs */
+  .orb-1 {
+    width: 400px;
+    height: 400px;
+  }
+
+  .orb-2 {
+    width: 350px;
+    height: 350px;
+  }
+
+  .orb-3 {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+/* ---------- Tablet / Small Desktop (max-width: 1080px) ---------- */
+@media (max-width: 1080px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  /* Stat cards → 3-column row on top */
+  .stats-column {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    order: 1;
+    position: static;
+    gap: 16px;
+  }
+
+  .right-column {
+    order: 2;
+  }
+
+  .standings-card {
+    order: 2;
+  }
+
+  /* Snapshot grid → 2 cols */
+  .snapshot-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Best XI still side by side */
+  .best-xi-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  /* Reduce section headers */
+  .snapshot-header__title,
+  .best-xi-header__title {
+    font-size: 1.4rem;
+  }
+
+  .snapshot-header__icon,
+  .best-xi-header__icon {
+    width: 46px;
+    height: 46px;
+    font-size: 1.3rem;
+  }
+
+  /* Team mini cards → smaller */
+  .team-mini-card {
+    flex: 0 0 125px;
+    padding: 16px 12px;
+  }
+
+  /* Awards → single column */
+  .awards-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .awards-header__icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+  }
+}
+
+/* ---------- Mobile Landscape / Small Tablet (max-width: 768px) ---------- */
+@media (max-width: 768px) {
+  .page {
+    padding: 0 16px;
+  }
+
+  .header {
+    padding: 28px 0 20px;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+    letter-spacing: -1px;
+    margin-bottom: 6px;
+  }
+
+  .header p {
+    font-size: 0.82rem;
+  }
+
+  /* Stack stat cards vertically */
+  .stats-column {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .card-3d {
+    padding: 20px;
+    border-radius: var(--radius-lg);
+  }
+
+  /* Stat card tweaks */
+  .stat-card__header {
+    margin-bottom: 12px;
+  }
+
+  .stat-card__icon {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+  }
+
+  .stat-card__title {
+    font-size: 1rem;
+  }
+
+  /* Standings card */
+  .standings-card {
+    padding: 20px 14px;
+  }
+
+  .standings-card__header {
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .standings-card__title {
+    font-size: 1.2rem;
+  }
+
+  .standings-card__icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  /* Table: hide less-important columns (GF, GA, GD) on mobile */
+  .standings-table thead th:nth-child(7),
+  .standings-table thead th:nth-child(8),
+  .standings-table thead th:nth-child(9),
+  .standings-table tbody td:nth-child(7),
+  .standings-table tbody td:nth-child(8),
+  .standings-table tbody td:nth-child(9) {
+    display: none;
+  }
+
+  .standings-table th,
+  .standings-table td {
+    padding: 10px 10px;
+    font-size: 0.78rem;
+  }
+
+  .team-cell {
+    gap: 8px;
+  }
+
+  .team-logo {
+    width: 32px;
+    height: 32px;
+    font-size: 0.95rem;
+  }
+
+  .team-name {
+    font-size: 0.82rem;
+  }
+
+  .team-detail {
+    display: none;
+  }
+
+  .pos-badge {
+    width: 24px;
+    height: 24px;
+    font-size: 0.7rem;
+  }
+
+  .form-dot {
+    width: 18px;
+    height: 18px;
+    font-size: 0.5rem;
+    border-radius: 4px;
+  }
+
+  /* Player row stats wrap */
+  .player-stats {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .player-stat {
+    min-width: 36px;
+    padding: 4px 6px;
+  }
+
+  .player-stat__value {
+    font-size: 0.75rem;
+  }
+
+  .player-stat__label {
+    font-size: 0.48rem;
+  }
+
+  /* Player avatar smaller */
+  .player-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .player-row {
+    padding: 8px 10px;
+    gap: 10px;
+  }
+
+  .player-info__name {
+    font-size: 0.82rem;
+  }
+
+  /* Snapshot section */
+  .snapshot-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .snapshot-header__title {
+    font-size: 1.3rem;
+  }
+
+  .snapshot-card {
+    padding: 18px;
+  }
+
+  .snapshot-card__value {
+    font-size: 2rem;
+  }
+
+  /* Best XI section */
+  .best-xi-section {
+    margin-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .best-xi-header__title {
+    font-size: 1.3rem;
+  }
+
+  /* Orbs smaller on mobile */
+  .orb-1 {
+    width: 250px;
+    height: 250px;
+    top: -80px;
+    left: -60px;
+  }
+
+  .orb-2 {
+    width: 220px;
+    height: 220px;
+    bottom: -60px;
+    right: -50px;
+  }
+
+  .orb-3 {
+    width: 180px;
+    height: 180px;
+  }
+
+  /* Transfer card */
+  .transfer-player {
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .transfer-player__avatar {
+    width: 38px;
+    height: 38px;
+  }
+
+  .transfer-player__name {
+    font-size: 0.8rem;
+  }
+
+  /* MVP card */
+  .mvp-featured {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .mvp-featured .player-avatar {
+    width: 46px;
+    height: 46px;
+  }
+
+  .mvp-featured__rating {
+    font-size: 1.5rem;
+  }
+
+  /* Modal tablet */
   .modal-content {
     width: 95%;
     max-height: 85vh;
-    border-radius: var(--radius-lg);
+  }
+
+  .modal-header {
+    padding: 22px 20px 14px;
+    gap: 10px;
+  }
+
+  .modal-header__icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+
+  .modal-header__title {
+    font-size: 1.1rem;
+  }
+
+  .modal-player-list {
+    padding: 12px 16px 20px;
+  }
+
+  .modal-player-row {
+    gap: 10px;
+    padding: 8px 10px;
   }
 
   .modal-player-row .player-stats {
@@ -2198,5 +3022,741 @@ body::before {
   .modal-player-row .player-stat {
     min-width: 34px;
     padding: 3px 5px;
+  }
+
+  /* Team mini cards */
+  .team-mini-card {
+    flex: 0 0 115px;
+    padding: 14px 10px;
+  }
+
+  .team-mini-card__stat {
+    font-size: 1.05rem;
+  }
+
+  .team-mini-card__name {
+    font-size: 0.75rem;
+  }
+
+  .team-stats-row {
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  /* Awards on small mobile */
+  .award-card__trophy {
+    font-size: 1.6rem;
+  }
+
+  .award-card__title {
+    font-size: 1.1rem;
+  }
+
+  .vote-player-row {
+    gap: 8px;
+    padding: 8px 8px;
+  }
+
+  .vote-btn {
+    padding: 5px 12px;
+    font-size: 0.62rem;
+  }
+
+  .award-result__avatar {
+    width: 64px;
+    height: 64px;
+  }
+
+  .award-result__avatar .avatar-initial,
+  .award-result__avatar img {
+    width: 64px !important;
+    height: 64px !important;
+    font-size: 24px !important;
+  }
+
+  .award-result__name {
+    font-size: 1.2rem;
+  }
+
+  .award-result__stats {
+    gap: 14px;
+  }
+}
+
+/* ---------- Small Mobile (max-width: 640px) ---------- */
+@media (max-width: 640px) {
+
+  /* Best XI → single column */
+  .best-xi-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* Snapshot → single column */
+  .snapshot-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .snapshot-card__top {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .snapshot-card__value {
+    font-size: 1.8rem;
+  }
+
+  .best-xi-header__title {
+    font-size: 1.2rem;
+  }
+
+  .best-xi-header__icon {
+    width: 42px;
+    height: 42px;
+    font-size: 1.3rem;
+  }
+
+  .best-xi-header {
+    margin-bottom: 24px;
+  }
+
+  .snapshot-header__icon {
+    width: 42px;
+    height: 42px;
+    font-size: 1.2rem;
+  }
+
+  /* Pitch cards */
+  .pitch {
+    aspect-ratio: 3 / 4.5;
+    padding: 50px 14px 22px;
+  }
+
+  .pitch__row {
+    gap: 16px;
+  }
+
+  .pitch-player__avatar {
+    width: 46px;
+    height: 46px;
+  }
+
+  .pitch-player__name {
+    font-size: 0.6rem;
+    max-width: 90px;
+    padding: 2px 6px;
+  }
+
+  .pitch-player__stat-badge {
+    font-size: 0.5rem;
+    padding: 1px 5px;
+  }
+
+  .pitch__center-circle {
+    width: 60px;
+    height: 60px;
+  }
+
+  .best-xi-card__label {
+    font-size: 0.68rem;
+    padding: 6px 16px;
+    letter-spacing: 1.5px;
+  }
+
+  /* Also hide Form column on small mobile */
+  .standings-table thead th:nth-child(11),
+  .standings-table tbody td:nth-child(11) {
+    display: none;
+  }
+
+  /* Modal → larger for small screens */
+  .modal-content {
+    width: 98%;
+    max-height: 90vh;
+    border-radius: var(--radius-lg);
+  }
+}
+
+/* ---------- Extra Small Mobile (max-width: 480px) ---------- */
+@media (max-width: 480px) {
+  .page {
+    padding: 0 12px;
+  }
+
+  .header {
+    padding: 24px 0 16px;
+  }
+
+  .header h1 {
+    font-size: 1.7rem;
+    letter-spacing: -0.5px;
+  }
+
+  .header p {
+    font-size: 0.78rem;
+  }
+
+  .header__tournament-badge {
+    padding: 7px 14px;
+    font-size: 0.6rem;
+    margin-bottom: 14px;
+    letter-spacing: 2px;
+  }
+
+  /* Cards even tighter padding */
+  .card-3d {
+    padding: 16px;
+    border-radius: var(--radius-md);
+  }
+
+  .standings-card {
+    padding: 16px 12px;
+  }
+
+  /* Table even tighter */
+  .standings-table th,
+  .standings-table td {
+    padding: 8px 8px;
+    font-size: 0.72rem;
+  }
+
+  .team-logo {
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+    border-radius: var(--radius-xs);
+  }
+
+  .team-name {
+    font-size: 0.78rem;
+  }
+
+  .pts-cell {
+    font-size: 0.95rem !important;
+  }
+
+  /* Player rows tighter */
+  .player-row {
+    padding: 6px 8px;
+    gap: 8px;
+  }
+
+  .player-row__rank {
+    width: 22px;
+    height: 22px;
+    font-size: 0.65rem;
+  }
+
+  .player-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .player-info__name {
+    font-size: 0.78rem;
+  }
+
+  .player-info__team {
+    font-size: 0.62rem;
+  }
+
+  /* Player stat badges: hide labels, show only values */
+  .player-stat__label {
+    display: none;
+  }
+
+  .player-stat {
+    min-width: 30px;
+    padding: 4px 5px;
+  }
+
+  .player-stat__value {
+    font-size: 0.72rem;
+  }
+
+  /* Snapshot */
+  .snapshot-card {
+    padding: 16px;
+  }
+
+  .snapshot-card__value {
+    font-size: 1.6rem;
+  }
+
+  .snapshot-card__label {
+    font-size: 0.6rem;
+    margin-bottom: 12px;
+  }
+
+  .snapshot-highlight {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .snapshot-highlight__avatar {
+    width: 30px;
+    height: 30px;
+  }
+
+  .snapshot-highlight__name {
+    font-size: 0.75rem;
+  }
+
+  .snapshot-substats {
+    gap: 4px;
+  }
+
+  .snapshot-substat__value {
+    font-size: 0.78rem;
+  }
+
+  /* Pitch cards */
+  .pitch {
+    aspect-ratio: 3 / 5;
+    padding: 46px 10px 18px;
+  }
+
+  .pitch__row {
+    gap: 12px;
+  }
+
+  .pitch-player {
+    gap: 4px;
+  }
+
+  .pitch-player__avatar {
+    width: 40px;
+    height: 40px;
+    border-width: 2px;
+  }
+
+  .pitch-player__name {
+    font-size: 0.55rem;
+    max-width: 78px;
+    padding: 1px 5px;
+  }
+
+  .pitch-player__stat-badge {
+    font-size: 0.45rem;
+    padding: 1px 4px;
+  }
+
+  .pitch__center-circle {
+    width: 50px;
+    height: 50px;
+  }
+
+  .pitch__penalty-top,
+  .pitch__penalty-bottom {
+    width: 50%;
+    height: 14%;
+  }
+
+  .best-xi-card__label {
+    font-size: 0.6rem;
+    padding: 5px 12px;
+    letter-spacing: 1px;
+    top: 12px;
+  }
+
+  /* MVP */
+  .mvp-featured {
+    padding: 10px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .mvp-featured .player-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .mvp-featured__rating {
+    font-size: 1.3rem;
+  }
+
+  /* Transfer */
+  .transfer-player__avatar {
+    width: 34px;
+    height: 34px;
+  }
+
+  .transfer-player__name {
+    font-size: 0.75rem;
+  }
+
+  .transfer-player__rating {
+    font-size: 0.8rem;
+    padding: 3px 8px;
+  }
+
+  .transfer-direction__icon {
+    width: 30px;
+    height: 30px;
+    font-size: 0.75rem;
+  }
+
+  /* Team mini cards */
+  .team-mini-card {
+    flex: 0 0 105px;
+    padding: 12px 8px;
+  }
+
+  .team-mini-card__emoji {
+    font-size: 1.25rem;
+    margin-bottom: 6px;
+  }
+
+  .team-mini-card__name {
+    font-size: 0.7rem;
+  }
+
+  .team-mini-card__stat {
+    font-size: 1rem;
+  }
+
+  .team-stats-row {
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  /* Modal → fullscreen */
+  .modal-content {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    border-radius: 0;
+    max-width: none;
+  }
+
+  .modal-overlay {
+    padding: 0;
+  }
+
+  .modal-close {
+    top: 12px;
+    right: 12px;
+    width: 42px;
+    height: 42px;
+    font-size: 1.3rem;
+  }
+
+  .modal-header {
+    padding: 18px 16px 14px;
+  }
+
+  .modal-header__icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .modal-header__title {
+    font-size: 1rem;
+  }
+
+  .modal-player-list {
+    padding: 10px 12px 80px;
+  }
+
+  .modal-player-row {
+    gap: 8px;
+    padding: 7px 8px;
+  }
+
+  .modal-player-row .player-stat__label {
+    display: none;
+  }
+
+  /* Orbs almost invisible on small screens */
+  .orb-1 {
+    width: 180px;
+    height: 180px;
+    opacity: 0.08;
+  }
+
+  .orb-2 {
+    width: 150px;
+    height: 150px;
+    opacity: 0.08;
+  }
+
+  .orb-3 {
+    width: 120px;
+    height: 120px;
+    opacity: 0.08;
+  }
+
+  /* Section spacing */
+  .best-xi-section {
+    margin-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .tournament-snapshot {
+    margin-top: 0;
+    padding-bottom: 10px;
+  }
+
+  .snapshot-header,
+  .best-xi-header {
+    margin-bottom: 20px;
+    gap: 12px;
+  }
+}
+
+/* ---------- Ultra Small Mobile (max-width: 360px) ---------- */
+@media (max-width: 360px) {
+  .page {
+    padding: 0 10px;
+  }
+
+  .header h1 {
+    font-size: 1.45rem;
+    letter-spacing: -0.3px;
+  }
+
+  .header p {
+    font-size: 0.72rem;
+  }
+
+  .card-3d {
+    padding: 14px;
+  }
+
+  .stat-card__title {
+    font-size: 0.9rem;
+  }
+
+  .stat-card__subtitle {
+    font-size: 0.58rem;
+  }
+
+  .stat-card__icon {
+    width: 34px;
+    height: 34px;
+    font-size: 0.9rem;
+  }
+
+  .standings-card {
+    padding: 14px 10px;
+  }
+
+  .standings-card__title {
+    font-size: 1.05rem;
+  }
+
+  .standings-card__icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.05rem;
+  }
+
+  /* Also hide Wins, Draws, Losses columns */
+  .standings-table thead th:nth-child(4),
+  .standings-table thead th:nth-child(5),
+  .standings-table thead th:nth-child(6),
+  .standings-table tbody td:nth-child(4),
+  .standings-table tbody td:nth-child(5),
+  .standings-table tbody td:nth-child(6) {
+    display: none;
+  }
+
+  .standings-table th,
+  .standings-table td {
+    padding: 7px 6px;
+    font-size: 0.68rem;
+  }
+
+  .team-logo {
+    width: 24px;
+    height: 24px;
+    font-size: 0.75rem;
+  }
+
+  .team-name {
+    font-size: 0.72rem;
+  }
+
+  /* Player rows minimal */
+  .player-row {
+    padding: 5px 6px;
+    gap: 6px;
+  }
+
+  .player-avatar {
+    width: 28px;
+    height: 28px;
+  }
+
+  .player-info__name {
+    font-size: 0.72rem;
+  }
+
+  .player-row__rank {
+    width: 20px;
+    height: 20px;
+    font-size: 0.6rem;
+    border-radius: 5px;
+  }
+
+  /* Pitch ultra small */
+  .pitch {
+    aspect-ratio: 3 / 5.5;
+    padding: 40px 8px 14px;
+  }
+
+  .pitch__row {
+    gap: 8px;
+  }
+
+  .pitch-player__avatar {
+    width: 34px;
+    height: 34px;
+    border-width: 2px;
+  }
+
+  .pitch-player__avatar .avatar-initial {
+    font-size: 12px !important;
+  }
+
+  .pitch-player__name {
+    font-size: 0.5rem;
+    max-width: 65px;
+  }
+
+  .pitch-player__stats {
+    display: none;
+  }
+
+  .pitch__center-circle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .best-xi-card__label {
+    font-size: 0.55rem;
+    padding: 4px 10px;
+    top: 10px;
+  }
+
+  /* Snapshot */
+  .snapshot-card {
+    padding: 12px;
+  }
+
+  .snapshot-card__value {
+    font-size: 1.4rem;
+  }
+
+  .snapshot-header__title,
+  .best-xi-header__title {
+    font-size: 1.05rem;
+  }
+
+  .snapshot-header__icon,
+  .best-xi-header__icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  /* Team mini cards */
+  .team-mini-card {
+    flex: 0 0 90px;
+    padding: 10px 6px;
+  }
+
+  .team-mini-card__emoji {
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+  }
+
+  .team-mini-card__name {
+    font-size: 0.65rem;
+  }
+
+  .team-mini-card__stat {
+    font-size: 0.9rem;
+  }
+
+  .team-mini-card__stat-label {
+    font-size: 0.5rem;
+  }
+
+  /* MVP */
+  .mvp-featured .player-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mvp-featured__rating {
+    font-size: 1.1rem;
+  }
+
+  /* Transfer */
+  .transfer-player__avatar {
+    width: 30px;
+    height: 30px;
+  }
+
+  .transfer-direction__icon {
+    width: 26px;
+    height: 26px;
+    font-size: 0.65rem;
+  }
+
+  /* Modal */
+  .modal-header {
+    padding: 14px 12px 10px;
+  }
+
+  .modal-header__icon {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+
+  .modal-header__title {
+    font-size: 0.9rem;
+  }
+
+  .modal-player-list {
+    padding: 8px 10px 70px;
+  }
+
+  .modal-player-row {
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .modal-player-row .player-avatar {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+/* ---------- Landscape Phone ---------- */
+@media (max-height: 500px) and (orientation: landscape) {
+  .header {
+    padding: 16px 0 12px;
+  }
+
+  .modal-content {
+    max-height: 95vh;
+  }
+
+  .modal-header {
+    padding: 14px 18px 10px;
+  }
+
+  .modal-player-list {
+    padding: 8px 14px 16px;
+  }
+
+  .pitch {
+    aspect-ratio: 4 / 3;
+    padding: 40px 20px 20px;
   }
 }

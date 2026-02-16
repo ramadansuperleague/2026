@@ -10,6 +10,100 @@
 
 
 /* ─────────────────────────────────────────
+   TOURNAMENT CONFIG — Dates & Settings
+   ✏️ Change these dates to match your Ramadan schedule
+   ───────────────────────────────────────── */
+
+const TOURNAMENT_CONFIG = {
+  // Voting opens on the first day of the last week of Ramadan
+  votingStartDate: '2026-03-13T00:00:00',
+  // Results reveal on the last day of Ramadan
+  resultsDate: '2026-03-19T00:00:00',
+  // Ramadan end
+  ramadanEndDate: '2026-03-19T23:59:59',
+};
+
+
+/* ─────────────────────────────────────────
+   🔥 FIREBASE CONFIG
+   ✏️ Paste YOUR Firebase project config below
+   (Firebase Console → Project Settings → Web App)
+   ───────────────────────────────────────── */
+
+const FIREBASE_CONFIG = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+  projectId: "YOUR_PROJECT",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "000000000000",
+  appId: "YOUR_APP_ID"
+};
+
+// Initialize Firebase (only if SDK loaded)
+let firebaseDB = null;
+if (typeof firebase !== 'undefined') {
+  firebase.initializeApp(FIREBASE_CONFIG);
+  firebaseDB = firebase.database();
+}
+
+/* ─────────────────────────────────────────
+   DEVICE ID — one vote per device
+   Generates a UUID and caches it in localStorage.
+   ───────────────────────────────────────── */
+
+function getDeviceId() {
+  const KEY = 'rsl_device_id';
+  let id = localStorage.getItem(KEY);
+  if (!id) {
+    // crypto.randomUUID with fallback
+    id = (typeof crypto !== 'undefined' && crypto.randomUUID)
+      ? crypto.randomUUID()
+      : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+        const r = Math.random() * 16 | 0;
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+      });
+    localStorage.setItem(KEY, id);
+  }
+  return id;
+}
+
+/* ─────────────────────────────────────────
+   castVote — write vote to Firebase RTDB
+   Path: votes/{awardKey}/{deviceId}
+   ───────────────────────────────────────── */
+
+function castVote(awardKey, playerId) {
+  if (!firebaseDB) return Promise.reject('Firebase not initialised');
+  const deviceId = getDeviceId();
+  return firebaseDB.ref(`votes/${awardKey}/${deviceId}`).set({
+    playerId: Number(playerId),
+    timestamp: firebase.database.ServerValue.TIMESTAMP
+  });
+}
+
+/* ─────────────────────────────────────────
+   listenVoteCounts — real-time vote tallies
+   Calls `callback({ playerId: count, ... }, total)`
+   whenever any vote changes.
+   ───────────────────────────────────────── */
+
+function listenVoteCounts(awardKey, callback) {
+  if (!firebaseDB) return;
+  firebaseDB.ref(`votes/${awardKey}`).on('value', snapshot => {
+    const counts = {};
+    let total = 0;
+    snapshot.forEach(child => {
+      const pid = child.val().playerId;
+      counts[pid] = (counts[pid] || 0) + 1;
+      total++;
+    });
+    callback(counts, total);
+  });
+}
+
+
+/* ─────────────────────────────────────────
    TEAMS — Edit standings here
    ───────────────────────────────────────── */
 
